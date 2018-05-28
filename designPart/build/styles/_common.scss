@@ -1,0 +1,104 @@
+/* -------------------------------------
+ * common
+/* ------------------------------------- */
+body {
+    background-color: $light;
+}
+
+html,
+body,
+ol,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: inherit;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active,
+button,
+button:focus,
+button:active,
+button:hover {
+    text-decoration: none;
+    outline: 0;
+}
+
+::selection {
+    // background: $purple;
+    // color: $light;
+}
+
+
+hr {
+    // border-top: 1px solid $border;
+}
+
+img {
+    max-width: 100%;
+}
+
+ul > li {
+    list-style: none;
+}
+
+iframe {
+    width: 100%;
+    border: none;
+}
+
+.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $black;
+}
+
+// custom select box
+.select-wrapper {
+    border: 0;
+    width: 100%;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background-color: $bg-gray;
+    position: relative;
+    transition: border 0.1s ease-in;
+    z-index: 1;
+    > select {
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        padding: 0 20px;
+        background-color: transparent;
+        font-size: 14px;
+        font-weight: 500;
+        color: $gray-dark;
+        appearance: none;
+        outline: none;
+    }
+    &::before {
+        position: absolute;
+        content: "\f0d7";
+        font-family: "FontAwesome";
+        font-size: 22px;
+        color: $gray-dark;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+    &:active,
+    &:focus {
+        outline: none;
+    }
+}

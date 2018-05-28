@@ -1,0 +1,124 @@
+/* -------------------------------------
+ * mixins
+/* ------------------------------------- */
+// reset ul or ol
+@mixin reset-list {
+	margin: 0;
+	padding: 0;
+    list-style: none;
+}
+
+// size
+@mixin size($width, $height) {
+	width: $width;
+	height: $height;
+}
+
+// size equal
+@mixin size-equal($value) {
+	width: $value;
+	height: $value;
+}
+
+// text overflow
+@mixin text-truncate($max-width: 100%) {
+	max-width: $max-width;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// push auto
+@mixin push-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// opacity
+@mixin opacity($value) {
+	opacity: $value;
+	$value-ie: ($value * 100);
+	filter: alpha(opacity=$value-ie);
+}
+
+// triangle
+@mixin triangle($direction, $size, $color, $position: static) {
+	position: $position;
+	display: block;
+	@if $direction == top {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-bottom: $size solid $color;
+    } @else if $direction == right {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-left: $size solid $color;
+    } @else if $direction == bottom {
+        border-left: $size solid transparent;
+        border-right: $size solid transparent;
+        border-top: $size solid $color;
+    } @else if  $direction == left {
+        border-top: $size solid transparent;
+        border-bottom: $size solid transparent;
+        border-right: $size solid $color;
+    }
+}
+
+// rgba opacity
+@mixin rgba-bg($color, $alpha) {
+	$rgba: rgba(red($color), green($color), blue($color), $alpha);
+	background-color: $color;
+	background-color: $rgba;
+}
+
+@mixin rgba-color($color, $alpha) {
+	$rgba: rgba(red($color), green($color), blue($color), $alpha);
+	color: $color;
+	color: $rgba;
+}
+
+@mixin rgba-border($color, $alpha) {
+	$rgba: rgba(red($color), green($color), blue($color), $alpha);
+	border-color: $color;
+	border-color: $rgba;
+}
+
+// placeholder
+@mixin placeholder($size, $color) {
+	&::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&::-moz-placeholder { /* Firefox 19+ */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&:-ms-input-placeholder { /* IE 10+ */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&:-moz-placeholder { /* Firefox 18- */
+    	font-size: $size;
+    	color: $color !important;
+	}
+}
+
+// placeholder focus
+@mixin placeholder-focus($size, $color) {
+	&:focus::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&:focus::-moz-placeholder { /* Firefox 19+ */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&:focus:-ms-input-placeholder { /* IE 10+ */
+    	font-size: $size;
+    	color: $color !important;
+	}
+	&:focus:-moz-placeholder { /* Firefox 18- */
+    	font-size: $size;
+    	color: $color !important;
+	}
+}

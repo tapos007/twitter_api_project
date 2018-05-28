@@ -1,0 +1,187 @@
+/* -------------------------------------
+ * panel section
+/* ------------------------------------- */
+.panel-section {
+    margin-top: 50px;
+}
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+}
+.search-box {
+    flex-basis: 65.75%;
+}
+.sort-box {
+    flex-basis: 31.5%;
+}
+.form-search,
+.select-wrapper {
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.24);
+}
+.form-search {
+    .form-control {
+        background-color: $bg-gray;
+        padding: 10px 60px 10px 35px;
+    }
+    .form-group {
+        position: relative;
+        margin: 0;
+        &::before,
+        &::after {
+            @extend .v-center;
+            font-family: "FontAwesome";
+            color: $blue;
+        }
+        &::before {
+            content: "\f142";
+            font-size: 16px;
+            left: 20px;
+        }
+        &::after {
+            content: "\f002";
+            font-size: 20px;
+            right: 20px;
+        }
+    }
+}
+
+
+.card-wrapper {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.card {
+    background-color: $bg-gray;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.24);
+    border-radius: 3px;
+    flex-basis: 31.55%;
+    margin-bottom: 30px;
+    padding-bottom: 44px;
+    overflow: hidden;
+    .card-cover {
+        height: 132px;
+        background: url(../images/cover.jpg) no-repeat scroll;
+        background-position: center center;
+        background-size: cover;
+        position: relative;
+        &::before {
+            @include size-equal(100%);
+            position: absolute;
+            content: "";
+            background-color: rgba(0,0,0,0.3);
+            display: block;
+            left: 0;
+            top: 0;
+        }
+    }
+    .thumb {
+        @include size-equal(85px);
+        border-radius: 50%;
+        margin: -42px auto 12px;
+        overflow: hidden;
+        position: relative;
+        > img {
+            @include size-equal(100%);
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        &::before {
+            @include size-equal(100%);
+            position: absolute;
+            content: "";
+            background: linear-gradient(to bottom, rgba(29, 233, 182, 0.4), transparent);
+            display: block;
+        }
+    }
+    > h3 {
+        font-size: 20px;
+        color: $black-light;
+        font-weight: 500;
+        margin-bottom: 3px;
+    }
+    > p,
+    .amount {
+        color: $black-dark;
+        font-weight: 300;
+    }
+    > p {
+        font-size: 18px;
+    }
+    .amount {
+        font-size: 30px;
+    }
+    .divider {
+        @include size(100%,1px);
+        background-color: $border-gray;
+        display: block;
+        margin: 17px 0 14px;
+        position: relative;
+        &::before {
+            @include size(45px, 4px);
+            @extend .h-center;
+            content: "";
+            background-color: $blue;
+            display: block;
+            bottom: 0;
+        }
+    }
+    .card-tbl {
+        margin-bottom: 20px;
+        padding: 5px 30px;
+    }
+    .card-col {
+        > span {
+            display: block;
+            line-height: 24px;
+            &:first-child {
+                font-size: 15px;
+                font-weight: 700;
+                color: $black-dark;
+            }
+            &:last-child {
+                font-size: 13px;
+                font-weight: 500;
+                color: $gray;
+            }
+        }
+    }
+}
+.loader {
+    flex-basis: 100%;
+    padding: 20px 0;
+    > i {
+        color: $gray-dark;
+    }
+}
+
+/* -------------------------------------
+ * panel section - responsive
+/* ------------------------------------- */
+@media only screen and (min-width:576px) and (max-width:767px) {
+    .panel-section {
+        margin-top: 40px;
+    }
+    .card {
+        flex-basis: 48.5%;
+    }
+}
+@media only screen and (max-width:575px) {
+    .panel-section {
+        margin-top: 35px;
+    }
+    .panel-header {
+        flex-wrap: wrap;
+    }
+    .search-box {
+        margin-bottom: 15px;
+    }
+    .search-box,
+    .sort-box {
+        flex-basis: 100%;
+    }
+    .card {
+        flex-basis: 100%;
+    }
+}
