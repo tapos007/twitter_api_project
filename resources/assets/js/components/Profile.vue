@@ -84,7 +84,7 @@
     import InfiniteLoading from 'vue-infinite-loading';
     // import axios from 'axios';
 
-    const api = 'http://twitter-api-project.test/api/test/';
+    const api = '/api/test/';
     let counter = 1;
 
     export default {
