@@ -20,7 +20,6 @@
 
     <!-- fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-
     <!-- styles -->
     <link rel="stylesheet" href="{{ asset('css/main.min.css') }}">
 </head>

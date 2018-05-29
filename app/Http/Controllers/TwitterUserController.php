@@ -17,7 +17,7 @@ class TwitterUserController extends Controller
 
     public function test($pageNumber=1)
     {
-        $userData = TwitterUser::skip(($pageNumber-1)*10)->take(10)->get()->pluck('twitter_name')->toArray();
+        $userData = TwitterUser::skip(($pageNumber-1)*10)->take(9)->get()->pluck('twitter_name')->toArray();
         $userString = "";
         foreach ($userData as $key=>$value){
             $userString .=$value;

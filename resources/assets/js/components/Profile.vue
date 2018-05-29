@@ -25,12 +25,17 @@
                             </div>
 
                         </div>
+                        <div class="card-wrapper">
 
-                        <div v-for="(profile, key) in profiles" class="card-wrapper">
-                            <div class="card text-center">
-                                <div class="card-cover"></div>
+                            <div class="card text-center" v-for="(profile, key) in profiles">
+                                <div class="card-cover"
+                                     v-bind:style='{ backgroundImage: "url(" + profile.profile_banner_url + ")", }'
+                                    >
+
+                                </div>
+
                                 <div class="thumb">
-                                    <!--<img src="{{ asset('images/thumb.jpg') }}" alt="user">-->
+                                    <img v-bind:src="profile.profile_image_url" alt="user">
                                 </div>
                                 <h3>{{ profile.name }}</h3>
                                 <p>Interaction Designer</p>
@@ -46,9 +51,20 @@
                                         <span>Funded</span>
                                     </div>
                                 </div>
+                                <div class="card-tbl d-table">
+                                    <div class="card-col text-left">
+                                        <span><i class="fa fa-user-o" aria-hidden="true"></i> {{ profile.followers_count }}</span>
+                                        <span>Followers</span>
+                                    </div>
+                                    <div class="card-col text-right">
+                                        <span><i class="fa fa-user-o" aria-hidden="true"></i> {{ profile.friends_count }}</span>
+                                        <span>Friends</span>
+                                    </div>
+                                </div>
                                 <a href="#" class="btn btn-light">Buy Now</a>
-                            </div> <!-- card -->
-                        </div>
+                            </div> <!-- card-1 -->
+
+                        </div><!-- CARD WRAPPER -->
 
                         <infinite-loading @infinite="infiniteHandler">
                             <span slot="no-more">
@@ -69,15 +85,11 @@
     // import axios from 'axios';
 
     const api = 'http://twitter-api-project.test/api/test/';
+    let counter = 1;
 
     export default {
         name: "Profile",
-        // mounted() {
-        //     console.log(api);
-        // },
-        // mounted() {
-        //     this.fetchData()
-        // },
+
         data() {
             return {
                 profiles: [],
@@ -85,21 +97,20 @@
         },
         methods: {
             infiniteHandler($state) {
-                axios.get(api, {
-                    params: {
-                        page: this.profiles.length / 10 + 1,
-                    },
-                }).then(({ data }) => {
-                    if (data.hits.length) {
-                        this.profiles = this.profiles.concat(data.hits);
-                        $state.loaded();
-                        if (this.profiles.length / 10 === 10) {
-                            $state.complete();
-                        }
-                    } else {
-                        $state.complete();
+                axios.get(api+counter, {
+
+                }).then(({data}) => {
+
+                    const temp = [];
+                    var info = data;
+                    for (let i = 0; i < info.length; i++) {
+                        temp.push(info[i]);
                     }
+                    this.profiles = this.profiles.concat(temp);
+                    counter++;
+                    $state.loaded();
                 });
+
             },
         },
         components: {
