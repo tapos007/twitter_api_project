@@ -59,7 +59,26 @@
 
 <script>
     export default {
-        name: "Profile"
+        name: "Profile",
+        mounted() {
+            this.fetchData()
+        },
+        data() {
+            return {
+                profiles: [],
+            }
+        },
+        methods: {
+            fetchData() {
+                axios.get(`/api/info/1`)
+                    .then((res) => {
+                        this.profiles = res.data
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
+        }
     }
 </script>
 

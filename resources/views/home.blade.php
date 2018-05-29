@@ -27,9 +27,9 @@
 <body>
 
 <div id="app">
-    <header></header>
+    <header-section></header-section>
     <profile></profile>
-    <footer></footer>
+    <footerSection></footerSection>
 </div>
 <!-- scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
