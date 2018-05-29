@@ -26,13 +26,13 @@
 
                         </div>
 
-                        <div class="card-wrapper">
+                        <div v-for="(profile, key) in profiles" class="card-wrapper">
                             <div class="card text-center">
                                 <div class="card-cover"></div>
                                 <div class="thumb">
                                     <!--<img src="{{ asset('images/thumb.jpg') }}" alt="user">-->
                                 </div>
-                                <h3>Lonut John</h3>
+                                <h3>{{ profile.name }}</h3>
                                 <p>Interaction Designer</p>
                                 <span class="amount">$ 570</span>
                                 <div class="divider"></div>
@@ -50,6 +50,12 @@
                             </div> <!-- card -->
                         </div>
 
+                        <infinite-loading @infinite="infiniteHandler">
+                            <span slot="no-more">
+                              There is no more Hacker News :(
+                            </span>
+                        </infinite-loading>
+
                     </div>
                 </div>
             </div>
@@ -58,27 +64,47 @@
 </template>
 
 <script>
+
+    import InfiniteLoading from 'vue-infinite-loading';
+    // import axios from 'axios';
+
+    const api = 'http://twitter-api-project.test/api/test/';
+
     export default {
         name: "Profile",
-        mounted() {
-            this.fetchData()
-        },
+        // mounted() {
+        //     console.log(api);
+        // },
+        // mounted() {
+        //     this.fetchData()
+        // },
         data() {
             return {
                 profiles: [],
             }
         },
         methods: {
-            fetchData() {
-                axios.get(`/api/info/1`)
-                    .then((res) => {
-                        this.profiles = res.data
-                    })
-                    .catch((err) => {
-                        console.log(err)
-                    })
-            }
-        }
+            infiniteHandler($state) {
+                axios.get(api, {
+                    params: {
+                        page: this.profiles.length / 10 + 1,
+                    },
+                }).then(({ data }) => {
+                    if (data.hits.length) {
+                        this.profiles = this.profiles.concat(data.hits);
+                        $state.loaded();
+                        if (this.profiles.length / 10 === 10) {
+                            $state.complete();
+                        }
+                    } else {
+                        $state.complete();
+                    }
+                });
+            },
+        },
+        components: {
+            InfiniteLoading,
+        },
     }
 </script>
 
